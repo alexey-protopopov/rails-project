@@ -5,7 +5,12 @@ class UsersController < ApplicationController
 
  	def create
    		@user = User.new(user_params)
-   		render 'new'
+   		if @user.save
+   			render 'new'
+   		else
+   			@reg_failure = 1
+   			render 'new'
+   		end
  	end
  	
  	def edit

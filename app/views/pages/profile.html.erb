@@ -51,7 +51,8 @@
     <h5 class="card-header"><%= comment.username %></h5>
     <div class="card-body">
       <p class="card-text"><%= comment.body %></p>
-      <%= link_to "Пост #{comment.post_id}", post_path(comment.post_id), :class => "badge bg-primary" %>
+      <% post = Post.find(comment.post_id) %>
+      <%= link_to "#{post.title}", post_path(comment.post_id), :class => "badge bg-primary" %>
       <br>
       <span class="badge bg-secondary"><%= comment.updated_at.strftime("%d-%m-%Y %H:%M:%S") %></span>
     </div>
