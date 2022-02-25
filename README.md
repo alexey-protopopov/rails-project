@@ -1,24 +1,19 @@
-# README
+# RailsProject
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Простой блог на RoR, поддерживающий:
 
-Things you may want to cover:
+* Регистрацию пользователей
 
-* Ruby version
+* Авторизацию пользователей
 
-* System dependencies
+* Добавление постов
 
-* Configuration
+* Редактирование и удаление постов(только для авторов)
 
-* Database creation
+* Добавление комментариев
 
-* Database initialization
+* Отображение информации о пользователе
 
-* How to run the test suite
+# Heroku
+[http://arcane-beyond-88019.herokuapp.com/](http://arcane-beyond-88019.herokuapp.com/)
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
