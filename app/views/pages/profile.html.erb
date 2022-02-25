@@ -1,0 +1,63 @@
+<% if @user %>
+  <h1><%= "Профиль пользователя #{@name}" %></h1>
+  <br>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th scope="row"></th>
+        <td>Имя пользователя </td>
+        <td><%= @name %></td> 
+      </tr>
+      <tr>
+        <th scope="row"></th>
+        <td>Дата регистрации</td>
+        <td><%= @reg_date %></td>
+      </tr>
+      <tr>
+        <th scope="row"></th>
+        <td>Всего постов</td>
+        <td><%= @posts_count %></td>
+      </tr>
+      <tr>
+        <th scope="row"></th>
+        <td>Всего комментариев</td>
+        <td><%= @comments_count %></td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <br>
+  <h1>Посты пользователя</h1>
+  <% @all_posts.each do |post| %>
+    <div class="card">
+      <h5 class="card-header"><%= post.title %></h5>
+      <div class="card-body">
+        <% post_preview = post.body[0..40] %>
+        <% if post.body.length > 40 %>
+          <% post_preview << "..." %>
+        <% end %>
+        <p class="card-text"><%= post_preview %></p>
+        <%= link_to "Читать далее", post_path(post), :class => 'btn btn-primary' %>
+      </div>
+    </div>
+    <br>
+  <% end %>
+  <hr>
+  <div style="clear:both">
+  <br>
+  <h1>Комментарии пользователя</h1>
+  <% @all_comments.each do |comment| %>
+  <div class="card">
+    <h5 class="card-header"><%= comment.username %></h5>
+    <div class="card-body">
+      <p class="card-text"><%= comment.body %></p>
+      <%= link_to "Пост #{comment.post_id}", post_path(comment.post_id), :class => "badge bg-primary" %>
+      <br>
+      <span class="badge bg-secondary"><%= comment.updated_at.strftime("%d-%m-%Y %H:%M:%S") %></span>
+    </div>
+  </div>
+  <br>
+  <% end %>
+  </div>
+<% else %>
+<% end %>

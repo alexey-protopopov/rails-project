@@ -1,0 +1,44 @@
+<h1><%= @post.title %></h1>
+<div class="card">
+  <div class="card-body">
+    <%= link_to "Автор: #{@post.author}",profile_path(@post.author), :class => "link-info"%>
+    <br>
+    <span class="badge bg-secondary"><%=@post.updated_at.strftime("%d-%m-%Y %H:%M:%S") %></span>
+  </div>
+</div>
+<br>
+<p><%= @post.body %></p>
+<hr>
+<% if current_user && current_user.username == @post.author %>
+	<%= link_to "Редактировать", edit_post_path(@post), :class => 'btn btn-warning'%>
+	<%= button_to "Удалить", post_path(@post),method: :delete, :class => 'btn btn-danger', remote: true%>
+<%end%>	
+<div style="clear:both">
+	<br>
+	<h2>Комментарии</h2>
+	<% @post.comments.each do |comment| %>
+	<div class="card">
+		<h5 class="card-header"><%= link_to comment.username, profile_path(comment.username), :class => "text-dark" %></h5>
+		<div class="card-body">
+			<p class="card-text"><%= comment.body %></p>
+			<span class="badge bg-secondary"><%= comment.updated_at.strftime("%d-%m-%Y %H:%M:%S") %></span>
+		</div>
+	</div>
+	<br>
+	<% end %>
+	<hr>
+	<br>
+	<% if logged_in? %>
+		<h4>Добавить комментарий</h4>
+		<%= form_for([@post, @post.comments.build]) do |f| %>
+			<p>
+				<%= f.text_area(:body, {:class => 'form-control'}) %>
+			</p>
+			<p>
+				<%= f.submit("Отправить",{:class => 'btn btn-success'}) %>
+			</p>
+		<% end %>
+	<% else %>
+		<p><a href="/login" class="link-primary"><h5>Войдите</a>, чтобы оставлять комментарии.</h5></p>
+	<%end%>
+</div>

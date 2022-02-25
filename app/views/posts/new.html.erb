@@ -1,0 +1,24 @@
+<h2>Добавление нового поста</h2>
+<% if logged_in? %>
+	<%= form_for :post, url: posts_path,html: {'data-turbo' => "false"} do |f| %>
+		<% if @post.errors.any? %>
+			<% @post.errors.messages.each do |msg| %>
+				<div class="alert alert-danger" role="alert"><%= msg[1][0].to_s %></div>
+			<% end %>
+		<% end %>	
+		<p>
+			Название<br>
+			<%= f.text_field(:title, {:class => 'form-control'}) %>
+		</p>
+		<p>
+			Текст статьи<br>
+			<%= f.text_area(:body, {:class => 'form-control'}) %>
+		</p>
+		<p>
+			<%= f.submit("Cохранить",{:class => 'btn btn-success'}) %>
+		</p>
+	<% end %>
+<% else %>
+	<p><a href="/login" class="link-primary"><h5>Войдите</a>, чтобы публиковать посты.</h5></p>
+<% end %>
+ 

@@ -1,0 +1,19 @@
+<h2>Редактирование поста</h2>
+<%= form_for :post, url: post_path(@post),html: {'data-turbo' => "false"}, method: :patch do |f| %>
+	<% if @post.errors.any? %>
+			<% @post.errors.messages.each do |msg| %>
+				<div class="alert alert-danger" role="alert"><%= msg[1][0].to_s %></div>
+			<% end %>
+		<% end %>	
+	<p>
+		Название<br>
+		<%= f.text_field(:title, {:class => 'form-control'}) %>
+	</p>
+	<p>
+		Текст статьи<br>
+		<%= f.text_area(:body, {:class => 'form-control'}) %>
+	</p>
+	<p>
+		<%= f.submit("Cохранить",{:class => 'btn btn-success'}) %>
+	</p>
+	<% end %>

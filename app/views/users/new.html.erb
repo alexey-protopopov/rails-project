@@ -1,0 +1,24 @@
+<% if @user.errors.any? %>
+	<% @user.errors.messages.each do |msg| %>
+		<div class="alert alert-danger" role="alert"><%= msg[1][0].to_s %></div>
+	<% end %>
+<% elsif @user.save %>
+	<div class="alert alert-success" role="alert">Вы успешно зарегистрировались!</div>
+	<div class="alert alert-info" role="alert"><%= link_to "Войдите, используя указанные при регистрации данные", login_path %></div>
+<% end %>
+<h2>Регистрация</h2>
+<br>
+<%= form_with(model: @user, local: true) do |f| %>
+<p>
+	Имя пользователя<br>
+	<%= f.text_field(:username, {:class => 'form-control'}) %>
+</p>
+<p>
+	Пароль<br>
+	<%= f.text_field(:password, {:class => 'form-control'}) %>
+</p>
+<p>
+	<%= f.submit("Зарегистрироваться",{:class => 'btn btn-primary'}) %>
+</p>
+ 
+<% end %>

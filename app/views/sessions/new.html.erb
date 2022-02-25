@@ -1,0 +1,19 @@
+<h2>Вход в учетную запись</h2>
+<br>
+<% if @login_success == -1 %>
+	<div class="alert alert-danger" role="alert">Неверный логин или пароль</div>
+<% end %>
+<%= form_with(scope: :session, url: login_path) do |f| %>
+<p>
+	Имя пользователя<br>
+	<%= f.text_field(:username, {:class => 'form-control'}) %>
+</p>
+<p>
+	Пароль<br>
+	<%= f.password_field(:password, {:class => 'form-control'}) %>
+</p>
+<p>
+	<%= f.submit("Войти",{:class => 'btn btn-primary'}) %>
+</p>
+ 
+<% end %>
